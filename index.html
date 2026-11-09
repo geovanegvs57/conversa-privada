@@ -5,542 +5,288 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#090d16">
+<meta name="description" content="AURA - Uma conexão em outro nível.">
+<link rel="manifest" href="./manifest.json">
 <title>AURA</title>
 
 <style>
 :root {
   color-scheme: dark;
-  --bg: #090d16;
-  --panel: #111a29;
-  --line: #293750;
-  --text: #f2f6ff;
-  --muted: #91a0b8;
-  --blue: #397cff;
-  --green: #35d49a;
-  --red: #ff7187;
+  --bg:#090d16;
+  --panel:#111a29;
+  --line:#293750;
+  --text:#f2f6ff;
+  --muted:#91a0b8;
+  --blue:#397cff;
+  --green:#35d49a;
+  --red:#ff7187;
 }
-
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0;
-  min-height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, Arial, sans-serif;
+*{box-sizing:border-box}
+html,body{
+ margin:0;min-height:100%;background:var(--bg);
+ color:var(--text);
+ font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif
 }
+body{min-height:100dvh}
+button,input{font:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
 
-body { min-height: 100dvh; }
+/* IDENTIDADE VISUAL */
 
-button, input { font: inherit; }
-button { cursor: pointer; }
-[hidden] { display: none !important; }
-
-/* LOGOMARCA ORIGINAL VG */
-
-.logo {
-  width: 78px;
-  height: 78px;
-  object-fit: cover;
-  border-radius: 19px;
-  border: 1px solid #315a91;
-  box-shadow: 0 0 25px #087bff35;
-  background: #080e19;
-  flex-shrink: 0;
+.logo{
+ width:78px;height:78px;object-fit:cover;
+ border-radius:19px;border:1px solid #315a91;
+ box-shadow:0 0 25px #087bff35;background:#080e19;
+ flex-shrink:0
 }
+.small-logo{width:49px;height:49px;border-radius:14px}
 
-.small-logo {
-  width: 49px;
-  height: 49px;
-  border-radius: 14px;
+.brand{display:flex;align-items:center;gap:15px;margin-bottom:24px}
+.brand h1{margin:0;font-size:30px;letter-spacing:.19em}
+.brand p{margin:5px 0 0;color:var(--muted);font-size:13px}
+
+/* LOGIN */
+
+#login{
+ width:min(100% - 28px,440px);
+ margin:7vh auto 24px;padding:25px;
+ background:linear-gradient(150deg,#17243a,#101725);
+ border:1px solid var(--line);border-radius:25px;
+ box-shadow:0 20px 60px #0007
 }
-
-/* TELA DE LOGIN */
-
-#login {
-  width: min(100% - 28px, 440px);
-  margin: 7vh auto 24px;
-  padding: 25px;
-  background: linear-gradient(150deg,#17243a,#101725);
-  border: 1px solid var(--line);
-  border-radius: 25px;
-  box-shadow: 0 20px 60px #0007;
+h2{font-size:20px;margin:12px 0 6px}
+.sub{font-size:14px;color:var(--muted);line-height:1.5}
+label{display:block;font-size:13px;color:#c8d4e8;margin:14px 0 7px}
+input{
+ width:100%;padding:14px;border:1px solid #35445d;
+ border-radius:13px;background:#0b1321;color:var(--text);outline:none
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 24px;
-}
-
-.brand h1 {
-  margin: 0;
-  font-size: 30px;
-  letter-spacing: .19em;
-}
-
-.brand p {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-h2 { font-size: 20px; }
-
-.sub {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  color: #c8d4e8;
-  margin: 14px 0 7px;
-}
-
-input {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #35445d;
-  border-radius: 13px;
-  background: #0b1321;
-  color: var(--text);
-  outline: none;
-}
-
-input:focus {
-  border-color: #5792ff;
-  box-shadow: 0 0 0 3px #397cff22;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.btn {
-  border: 1px solid transparent;
-  border-radius: 13px;
-  padding: 13px 15px;
-  font-weight: 700;
-}
-
-.primary {
-  background: linear-gradient(100deg,#397cff,#245fe0);
-  color: white;
-  flex: 1;
-}
-
-.secondary {
-  background: #202d42;
-  color: #e2eaff;
-  border-color: #35445d;
-  flex: 1;
-}
-
-#error, #statusMsg {
-  font-size: 13px;
-  line-height: 1.5;
-  margin-top: 13px;
-  overflow-wrap: anywhere;
-}
-
-#error { color: #ff8999; }
-#statusMsg { color: #a9c6ff; }
+input:focus{border-color:#5792ff;box-shadow:0 0 0 3px #397cff22}
+.actions{display:flex;gap:10px;margin-top:18px}
+.btn{border:1px solid transparent;border-radius:13px;padding:13px 15px;font-weight:700}
+.primary{background:linear-gradient(100deg,#397cff,#245fe0);color:white;flex:1}
+.secondary{background:#202d42;color:#e2eaff;border-color:#35445d;flex:1}
+.btn:disabled{opacity:.5}
+#error,#statusMsg{font-size:13px;line-height:1.5;margin-top:13px;overflow-wrap:anywhere}
+#error{color:#ff8999}
+#statusMsg{color:#a9c6ff}
 
 /* CONVERSA */
 
-#chat {
-  height: 100dvh;
-  max-width: 900px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
+#chat{
+ height:100dvh;max-width:900px;margin:auto;
+ display:flex;flex-direction:column;background:var(--bg)
+}
+header{
+ min-height:78px;flex-shrink:0;display:flex;align-items:center;
+ gap:12px;padding:10px 14px;background:#0e1726;
+ border-bottom:1px solid var(--line)
+}
+.head{flex:1;min-width:0}
+.head strong{font-size:16px;letter-spacing:.18em}
+.status{font-size:12px;color:var(--muted);margin-top:3px}
+.status.online{color:var(--green)}
+#unreadBadge{
+ display:inline-block;margin-top:5px;padding:3px 8px;
+ border-radius:20px;background:#244d91;color:#dceaff;
+ font-size:11px
+}
+#menuWrap{position:relative}
+.icon{
+ width:43px;height:43px;border:1px solid #34435b;
+ border-radius:12px;background:#1a263a;color:#e4edff;font-size:23px
+}
+#menu{
+ position:absolute;right:0;top:50px;width:230px;padding:7px;
+ background:#182438;border:1px solid #364761;border-radius:14px;
+ box-shadow:0 15px 40px #0009;z-index:5
+}
+.menuitem{
+ width:100%;text-align:left;border:0;border-radius:9px;
+ padding:12px;background:transparent;color:var(--text)
+}
+.menuitem.danger{color:var(--red)}
+
+#messages{
+ flex:1;overflow-y:auto;padding:18px 14px 24px;
+ display:flex;flex-direction:column;gap:11px
+}
+.empty{margin:auto;text-align:center;color:var(--muted);line-height:1.7}
+.msg{
+ max-width:min(84%,600px);padding:11px 13px 8px;
+ background:#182438;border:1px solid #2b3a53;
+ border-radius:17px 17px 17px 5px;align-self:flex-start;
+ overflow-wrap:anywhere;white-space:pre-wrap
+}
+.msg.mine{
+ align-self:flex-end;
+ background:linear-gradient(145deg,#203e73,#192e52);
+ border-color:#31568c;border-radius:17px 17px 5px 17px
+}
+.msgtext{font-size:15px;line-height:1.45}
+.meta{font-size:10px;color:#aab8ce;text-align:right;margin-top:6px}
+
+#composer{
+ display:flex;gap:9px;
+ padding:11px 12px calc(11px + env(safe-area-inset-bottom));
+ background:#0e1726;border-top:1px solid var(--line)
+}
+#message{flex:1;min-width:0;margin:0;border-radius:15px;background:#121e30}
+#send{
+ padding:0 18px;border:0;border-radius:14px;
+ background:linear-gradient(100deg,#397cff,#245fe0);
+ color:white;font-weight:700
 }
 
-header {
-  height: 78px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  background: #0e1726;
-  border-bottom: 1px solid var(--line);
+/* CONFIRMAÇÃO */
+
+#overlay{
+ position:fixed;inset:0;background:#000b;
+ display:flex;align-items:center;justify-content:center;
+ padding:22px;z-index:10
+}
+.dialog{
+ width:min(100%,380px);padding:22px;border-radius:20px;
+ background:#172338;border:1px solid #3a4c69
+}
+.dialog h3{margin:0 0 9px}
+.dialog p{color:var(--muted);font-size:14px;line-height:1.5}
+.dialogactions{display:flex;gap:10px;margin-top:20px}
+.dialogactions button{flex:1}
+
+#toast{
+ position:fixed;bottom:calc(85px + env(safe-area-inset-bottom));
+ left:50%;transform:translateX(-50%);
+ padding:11px 16px;background:#24334c;border:1px solid #405777;
+ border-radius:12px;z-index:20;font-size:13px;
+ max-width:90%;text-align:center
 }
 
-.head {
-  flex: 1;
-  min-width: 0;
-}
-
-.head strong {
-  font-size: 16px;
-  letter-spacing: .18em;
-}
-
-.status {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 3px;
-}
-
-.status.online { color: var(--green); }
-
-#menuWrap { position: relative; }
-
-.icon {
-  width: 43px;
-  height: 43px;
-  border: 1px solid #34435b;
-  border-radius: 12px;
-  background: #1a263a;
-  color: #e4edff;
-  font-size: 23px;
-}
-
-#menu {
-  position: absolute;
-  right: 0;
-  top: 50px;
-  width: 230px;
-  padding: 7px;
-  background: #182438;
-  border: 1px solid #364761;
-  border-radius: 14px;
-  box-shadow: 0 15px 40px #0009;
-  z-index: 5;
-}
-
-.menuitem {
-  width: 100%;
-  text-align: left;
-  border: 0;
-  border-radius: 9px;
-  padding: 12px;
-  background: transparent;
-  color: var(--text);
-}
-
-.menuitem.danger { color: var(--red); }
-
-#messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 18px 14px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-}
-
-.empty {
-  margin: auto;
-  text-align: center;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.msg {
-  max-width: min(84%,600px);
-  padding: 11px 13px 8px;
-  background: #182438;
-  border: 1px solid #2b3a53;
-  border-radius: 17px 17px 17px 5px;
-  align-self: flex-start;
-  overflow-wrap: anywhere;
-  white-space: pre-wrap;
-}
-
-.msg.mine {
-  align-self: flex-end;
-  background: linear-gradient(145deg,#203e73,#192e52);
-  border-color: #31568c;
-  border-radius: 17px 17px 5px 17px;
-}
-
-.msgtext {
-  font-size: 15px;
-  line-height: 1.45;
-}
-
-.meta {
-  font-size: 10px;
-  color: #aab8ce;
-  text-align: right;
-  margin-top: 6px;
-}
-
-#composer {
-  display: flex;
-  gap: 9px;
-  padding: 11px 12px calc(11px + env(safe-area-inset-bottom));
-  background: #0e1726;
-  border-top: 1px solid var(--line);
-}
-
-#message {
-  flex: 1;
-  min-width: 0;
-  margin: 0;
-  border-radius: 15px;
-  background: #121e30;
-}
-
-#send {
-  padding: 0 18px;
-  border: 0;
-  border-radius: 14px;
-  background: linear-gradient(100deg,#397cff,#245fe0);
-  color: white;
-  font-weight: 700;
-}
-
-/* CONFIRMAÇÃO DE EXCLUSÃO */
-
-#overlay {
-  position: fixed;
-  inset: 0;
-  background: #000b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 22px;
-  z-index: 10;
-}
-
-.dialog {
-  width: min(100%,380px);
-  padding: 22px;
-  border-radius: 20px;
-  background: #172338;
-  border: 1px solid #3a4c69;
-}
-
-.dialog h3 { margin: 0 0 9px; }
-
-.dialog p {
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.dialogactions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.dialogactions button { flex: 1; }
-
-#toast {
-  position: fixed;
-  bottom: calc(85px + env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 11px 16px;
-  background: #24334c;
-  border: 1px solid #405777;
-  border-radius: 12px;
-  z-index: 20;
-  font-size: 13px;
-  max-width: 90%;
-  text-align: center;
-}
-
-@media(min-width:700px) {
-  #chat {
-    height: min(900px,100dvh);
-    border-inline: 1px solid var(--line);
-  }
+@media(min-width:700px){
+ #chat{height:min(900px,100dvh);border-inline:1px solid var(--line)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- TELA DE LOGIN -->
 
 <section id="login">
-
-  <div class="brand">
-    <img class="logo" src="logo-vg.png" alt="Logomarca VG">
-    <div>
-      <h1>AURA</h1>
-      <p>Uma conexão em outro nível.</p>
-    </div>
+ <div class="brand">
+  <img class="logo" src="./logo-vg.png" alt="Logomarca VG">
+  <div>
+   <h1>AURA</h1>
+   <p>Uma conexão em outro nível.</p>
   </div>
+ </div>
 
-  <h2>Bem-vindo</h2>
-  <p class="sub">Entre com seu e-mail e sua senha para continuar.</p>
+ <h2>Bem-vindo</h2>
+ <p class="sub">Entre com seu e-mail e sua senha para continuar.</p>
 
-  <form id="loginForm" autocomplete="off">
+ <form id="loginForm" autocomplete="off">
+  <label for="email">E-mail</label>
+  <input id="email" type="email"
+   placeholder="Seu e-mail" autocomplete="off"
+   autocapitalize="none" spellcheck="false" required>
 
-    <label for="email">E-mail</label>
-    <input id="email" type="email"
-      placeholder="Seu e-mail"
-      autocomplete="off"
-      autocapitalize="none"
-      spellcheck="false"
-      required>
+  <label for="password">Senha</label>
+  <input id="password" type="password"
+   placeholder="Sua senha" autocomplete="new-password" required>
 
-    <label for="password">Senha</label>
-    <input id="password" type="password"
-      placeholder="Sua senha"
-      autocomplete="new-password"
-      required>
+  <div class="actions">
+   <button class="btn primary" type="submit">Entrar</button>
+   <button class="btn secondary" id="register" type="button">Cadastrar</button>
+  </div>
+ </form>
 
-    <div class="actions">
-      <button class="btn primary" type="submit">Entrar</button>
-      <button class="btn secondary" id="register" type="button">Cadastrar</button>
-    </div>
-
-  </form>
-
-  <div id="statusMsg"></div>
-  <div id="error" role="alert"></div>
-
+ <div id="statusMsg"></div>
+ <div id="error" role="alert"></div>
 </section>
 
-<!-- CHAT -->
+<!-- TELA PRINCIPAL -->
 
 <section id="chat" hidden>
+ <header>
+  <img class="logo small-logo" src="./logo-vg.png" alt="VG">
 
-  <header>
-
-    <img class="logo small-logo"
-      src="logo-vg.png" alt="VG">
-
-    <div class="head">
-      <strong>AURA</strong>
-      <div id="presence" class="status">Conectando...</div>
-    </div>
-
-    <div id="menuWrap">
-
-      <button id="menuBtn" class="icon"
-        type="button" aria-label="Menu">⋮</button>
-
-      <div id="menu" hidden>
-
-        <button id="deleteBtn"
-          class="menuitem danger" type="button">
-          Apagar histórico
-        </button>
-
-        <button id="logout"
-          class="menuitem" type="button">
-          Sair da conta
-        </button>
-
-      </div>
-    </div>
-
-  </header>
-
-  <main id="messages" aria-live="polite">
-    <div class="empty">Carregando mensagens...</div>
-  </main>
-
-  <form id="composer">
-
-    <input id="message"
-      type="text"
-      maxlength="4000"
-      placeholder="Escreva uma mensagem..."
-      autocomplete="off">
-
-    <button id="send" type="submit">Enviar</button>
-
-  </form>
-
-</section>
-
-<!-- JANELA DE CONFIRMAÇÃO -->
-
-<div id="overlay" hidden>
-
-  <div class="dialog">
-
-    <h3>Apagar histórico?</h3>
-
-    <p>
-      Todas as mensagens serão apagadas para os dois participantes.
-      Esta ação não poderá ser desfeita.
-    </p>
-
-    <div class="dialogactions">
-
-      <button id="cancelDelete"
-        class="btn secondary" type="button">
-        Cancelar
-      </button>
-
-      <button id="confirmDelete"
-        class="btn primary" type="button">
-        Apagar
-      </button>
-
-    </div>
-
+  <div class="head">
+   <strong>AURA</strong>
+   <div id="presence" class="status">Conectando...</div>
+   <div id="unreadBadge" hidden>0 mensagens não lidas</div>
   </div>
 
+  <div id="menuWrap">
+   <button id="menuBtn" class="icon" type="button">⋮</button>
+
+   <div id="menu" hidden>
+    <button id="deleteBtn" class="menuitem danger" type="button">
+     Apagar histórico
+    </button>
+    <button id="logout" class="menuitem" type="button">
+     Sair da conta
+    </button>
+   </div>
+  </div>
+ </header>
+
+ <main id="messages" aria-live="polite">
+  <div class="empty">Carregando mensagens...</div>
+ </main>
+
+ <form id="composer">
+  <input id="message" type="text" maxlength="4000"
+   placeholder="Escreva uma mensagem..." autocomplete="off">
+  <button id="send" type="submit">Enviar</button>
+ </form>
+</section>
+
+<!-- CONFIRMAÇÃO DE EXCLUSÃO -->
+
+<div id="overlay" hidden>
+ <div class="dialog">
+  <h3>Apagar histórico?</h3>
+  <p>
+   Todas as mensagens serão apagadas para os dois participantes.
+   Esta ação não poderá ser desfeita.
+  </p>
+  <div class="dialogactions">
+   <button id="cancelDelete" class="btn secondary" type="button">Cancelar</button>
+   <button id="confirmDelete" class="btn primary" type="button">Apagar</button>
+  </div>
+ </div>
 </div>
 
 <div id="toast" hidden></div>
 
 <script type="module">
 
-import {
- initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+// ==========================================
+// FIREBASE - MANTENHA SUAS CHAVES REAIS
+// ==========================================
+
+import {initializeApp} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
- getAuth,
- onAuthStateChanged,
- createUserWithEmailAndPassword,
- signInWithEmailAndPassword,
- signOut,
- setPersistence,
- inMemoryPersistence
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+ getAuth,onAuthStateChanged,createUserWithEmailAndPassword,
+ signInWithEmailAndPassword,signOut,setPersistence,inMemoryPersistence
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
- getFirestore,
- doc,
- getDoc,
- collection,
- query,
- orderBy,
- limit,
- onSnapshot,
- addDoc,
- updateDoc,
- arrayUnion,
- serverTimestamp,
- getDocs,
- deleteDoc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+ getFirestore,doc,getDoc,collection,query,orderBy,limit,
+ onSnapshot,addDoc,updateDoc,arrayUnion,serverTimestamp,
+ getDocs,deleteDoc
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
- getDatabase,
- ref,
- get,
- onValue,
- onDisconnect,
- set,
- remove,
+ getDatabase,ref,get,onValue,onDisconnect,set,remove,
  serverTimestamp as rtdbTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-// ==========================================
-// CONFIGURAÇÃO DO FIREBASE
-// MANTENHA SEUS DADOS REAIS AQUI
-// ==========================================
+} from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDLvv51dB1xVaI7jwrRFVjqXzWy_wjNo6w",
@@ -552,34 +298,19 @@ const firebaseConfig = {
   appId: "1:1050586962296:web:49fec0077191c5506b908d"
 };
 
-// IDENTIFICADOR DA CONVERSA
 const ROOM = "conversa-privada";
 
-// ==========================================
-// INICIALIZAÇÃO
-// ==========================================
-
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getFirestore(app);
-
 const rtdb = getDatabase(app);
 
-await setPersistence(auth, inMemoryPersistence);
+await setPersistence(auth,inMemoryPersistence);
 
 const $ = id => document.getElementById(id);
-
-const messagesRef = collection(
- db,
- "conversations",
- ROOM,
- "messages"
-);
+const messagesRef = collection(db,"conversations",ROOM,"messages");
 
 let user = null;
-
 let stopMessages = null;
 let stopConnection = null;
 let stopOther = null;
@@ -589,562 +320,368 @@ let toastTimer = null;
 // FUNÇÕES AUXILIARES
 // ==========================================
 
-function showError(text) {
+function showError(text){
  $("error").textContent = text || "";
 }
 
-function toast(text) {
+function toast(text){
  $("toast").textContent = text;
  $("toast").hidden = false;
-
  clearTimeout(toastTimer);
-
- toastTimer = setTimeout(() => {
-  $("toast").hidden = true;
- }, 3500);
+ toastTimer = setTimeout(()=>$("toast").hidden=true,3500);
 }
 
-function cleanup() {
-
- if (stopMessages) {
-  stopMessages();
-  stopMessages = null;
- }
-
- if (stopConnection) {
-  stopConnection();
-  stopConnection = null;
- }
-
- if (stopOther) {
-  stopOther();
-  stopOther = null;
- }
-
+function cleanup(){
+ if(stopMessages){stopMessages();stopMessages=null}
+ if(stopConnection){stopConnection();stopConnection=null}
+ if(stopOther){stopOther();stopOther=null}
 }
 
-function formatTime(timestamp) {
-
- if (!timestamp?.toDate) return "agora";
-
- return timestamp.toDate().toLocaleString(
-  "pt-BR",
-  {
-   day:"2-digit",
-   month:"2-digit",
-   hour:"2-digit",
-   minute:"2-digit"
-  }
- );
-
+function formatTime(timestamp){
+ if(!timestamp?.toDate)return "agora";
+ return timestamp.toDate().toLocaleString("pt-BR",{
+  day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"
+ });
 }
 
 // ==========================================
-// VERIFICAR AUTORIZAÇÃO NO REALTIME DATABASE
+// AUTORIZAÇÃO
 // ==========================================
 
-async function isMember(uid) {
-
- const snapshot = await get(
-  ref(rtdb, "members/" + uid)
- );
-
+async function isMember(uid){
+ const snapshot = await get(ref(rtdb,"members/"+uid));
  return snapshot.val() === true;
-
 }
 
 // ==========================================
-// MOSTRAR MENSAGENS
+// MENSAGENS
 // ==========================================
 
-function drawMessage(data) {
-
+function drawMessage(data){
  const mine = data.senderId === user.uid;
-
  const bubble = document.createElement("article");
-
  bubble.className = "msg" + (mine ? " mine" : "");
 
  const text = document.createElement("div");
-
  text.className = "msgtext";
-
  text.textContent = data.text || "";
-
  bubble.appendChild(text);
 
  const meta = document.createElement("div");
-
  meta.className = "meta";
 
- const read =
-  Array.isArray(data.readBy) &&
-  data.readBy.length > 1;
+ const read = Array.isArray(data.readBy) && data.readBy.length > 1;
 
- meta.textContent =
-  formatTime(data.createdAt) +
-  (mine
-   ? (read ? " · Visualizada" : " · Enviada")
-   : "");
+ meta.textContent = formatTime(data.createdAt) +
+  (mine ? (read ? " · Visualizada" : " · Enviada") : "");
 
  bubble.appendChild(meta);
-
  $("messages").appendChild(bubble);
-
 }
 
-// ==========================================
-// MARCAR MENSAGEM COMO VISUALIZADA
-// ==========================================
+async function markRead(id,data){
+ if(data.senderId === user.uid) return;
+ if((data.readBy || []).includes(user.uid)) return;
 
-async function markRead(id, data) {
-
- if (data.senderId === user.uid) return;
-
- if ((data.readBy || []).includes(user.uid)) return;
-
- try {
-
+ try{
   await updateDoc(
-   doc(db, "conversations", ROOM, "messages", id),
-   {
-    readBy: arrayUnion(user.uid)
-   }
+   doc(db,"conversations",ROOM,"messages",id),
+   {readBy:arrayUnion(user.uid)}
   );
-
- } catch (error) {
-
-  console.warn("Erro ao marcar leitura:", error);
-
+ }catch(error){
+  console.warn("Erro ao marcar leitura:",error);
  }
-
 }
 
 // ==========================================
-// INICIAR CONVERSA
+// ABRIR CONVERSA
 // ==========================================
 
-async function startChat(current) {
+async function startChat(current){
 
- if (!(await isMember(current.uid))) {
-
+ if(!(await isMember(current.uid))){
   await signOut(auth);
-
-  throw Error(
-   "Sua conta ainda não foi autorizada pelo administrador."
-  );
-
+  throw Error("Sua conta ainda não foi autorizada pelo administrador.");
  }
 
- const conversation = await getDoc(
-  doc(db, "conversations", ROOM)
- );
+ const conversation = await getDoc(doc(db,"conversations",ROOM));
 
- if (
-  !conversation.exists() ||
-  !(conversation.data().members || []).includes(current.uid)
- ) {
-
+ if(!conversation.exists() ||
+    !(conversation.data().members || []).includes(current.uid)){
   await signOut(auth);
-
-  throw Error(
-   "Esta conta não está autorizada nesta conversa."
-  );
-
+  throw Error("Esta conta não está autorizada nesta conversa.");
  }
 
  const members = conversation.data().members;
 
  $("login").hidden = true;
-
  $("chat").hidden = false;
 
  $("messages").innerHTML =
   '<div class="empty">Carregando mensagens...</div>';
 
- // CARREGAR HISTÓRICO
-
  const q = query(
   messagesRef,
-  orderBy("createdAt", "asc"),
+  orderBy("createdAt","asc"),
   limit(300)
  );
 
- stopMessages = onSnapshot(q, snapshot => {
+ stopMessages = onSnapshot(q,snapshot=>{
 
   $("messages").innerHTML = "";
 
-  if (snapshot.empty) {
-
+  if(snapshot.empty){
    $("messages").innerHTML =
     '<div class="empty">Nenhuma mensagem ainda.<br>Envie um oi para começar.</div>';
-
+   $("unreadBadge").hidden = true;
    return;
-
   }
 
-  snapshot.forEach(item => {
+  let unread = 0;
 
+  snapshot.forEach(item=>{
    const data = item.data();
 
+   if(data.senderId !== user.uid &&
+      !(data.readBy || []).includes(user.uid)){
+    unread++;
+   }
+
    drawMessage(data);
-
-   markRead(item.id, data);
-
+   markRead(item.id,data);
   });
 
-  $("messages").scrollTop =
-   $("messages").scrollHeight;
+  $("unreadBadge").hidden = unread === 0;
+  $("unreadBadge").textContent =
+   unread + (unread === 1 ? " mensagem não lida" : " mensagens não lidas");
 
- }, error => {
+  $("messages").scrollTop = $("messages").scrollHeight;
 
+ },error=>{
   toast("Erro ao carregar mensagens: " + error.message);
-
  });
 
- // PRESENÇA ONLINE / OFFLINE
+ // PRESENÇA
 
- const myPresence = ref(
-  rtdb,
-  "presence/" + current.uid
- );
+ const myPresence = ref(rtdb,"presence/"+current.uid);
+ const connected = ref(rtdb,".info/connected");
 
- const connected = ref(
-  rtdb,
-  ".info/connected"
- );
-
- stopConnection = onValue(
-  connected,
-  async snapshot => {
-
-   if (snapshot.val() === true) {
-
-    try {
-
-     await onDisconnect(myPresence).remove();
-
-     await set(myPresence, {
-      state:"online",
-      lastChanged:rtdbTimestamp()
-     });
-
-    } catch (error) {
-
-     console.warn("Erro de presença:", error);
-
-    }
-
+ stopConnection = onValue(connected,async snapshot=>{
+  if(snapshot.val() === true){
+   try{
+    await onDisconnect(myPresence).remove();
+    await set(myPresence,{
+     state:"online",
+     lastChanged:rtdbTimestamp()
+    });
+   }catch(error){
+    console.warn("Erro de presença:",error);
    }
-
   }
- );
+ });
 
- const other = members.find(
-  uid => uid !== current.uid
- );
+ const other = members.find(uid=>uid!==current.uid);
 
- if (other) {
+ if(other){
+  stopOther = onValue(ref(rtdb,"presence/"+other),snapshot=>{
+   const online =
+    snapshot.exists() && snapshot.val()?.state === "online";
 
-  stopOther = onValue(
-   ref(rtdb, "presence/" + other),
-   snapshot => {
-
-    const online =
-     snapshot.exists() &&
-     snapshot.val()?.state === "online";
-
-    $("presence").textContent =
-     online ? "● Online" : "Offline";
-
-    $("presence").className =
-     "status" + (online ? " online" : "");
-
-   }
-  );
-
- } else {
-
+   $("presence").textContent = online ? "● Online" : "Offline";
+   $("presence").className = "status" + (online ? " online" : "");
+  });
+ }else{
   $("presence").textContent = "Conectado";
-
  }
-
 }
 
 // ==========================================
-// ENTRAR
+// LOGIN
 // ==========================================
 
-$("loginForm").addEventListener("submit", async event => {
-
+$("loginForm").addEventListener("submit",async event=>{
  event.preventDefault();
-
  showError("");
-
  $("statusMsg").textContent = "";
 
- try {
-
+ try{
   await signInWithEmailAndPassword(
-   auth,
-   $("email").value.trim(),
-   $("password").value
+   auth,$("email").value.trim(),$("password").value
   );
-
   $("password").value = "";
-
- } catch (error) {
-
-  showError(
-   "Não foi possível entrar: " + error.message
-  );
-
+ }catch(error){
+  showError("Não foi possível entrar: "+error.message);
  }
-
 });
 
 // ==========================================
-// CADASTRAR
+// CADASTRO
 // ==========================================
 
-$("register").addEventListener("click", async () => {
-
+$("register").addEventListener("click",async()=>{
  showError("");
-
  $("statusMsg").textContent = "";
 
- try {
-
-  const credential =
-   await createUserWithEmailAndPassword(
-    auth,
-    $("email").value.trim(),
-    $("password").value
-   );
+ try{
+  const credential = await createUserWithEmailAndPassword(
+   auth,$("email").value.trim(),$("password").value
+  );
 
   const uid = credential.user.uid;
-
   await signOut(auth);
-
   $("password").value = "";
 
   $("statusMsg").textContent =
-   "Cadastro criado! UID: " + uid +
+   "Cadastro criado! UID: "+uid+
    ". Solicite ao administrador a autorização.";
-
- } catch (error) {
-
-  showError(
-   "Não foi possível cadastrar: " + error.message
-  );
-
+ }catch(error){
+  showError("Não foi possível cadastrar: "+error.message);
  }
-
 });
 
 // ==========================================
 // ENVIAR MENSAGEM
 // ==========================================
 
-$("composer").addEventListener("submit", async event => {
-
+$("composer").addEventListener("submit",async event=>{
  event.preventDefault();
 
  const text = $("message").value.trim();
-
- if (!text || !user) return;
+ if(!text || !user)return;
 
  $("send").disabled = true;
 
- try {
-
-  await addDoc(messagesRef, {
-
+ try{
+  await addDoc(messagesRef,{
    text,
-
    senderId:user.uid,
-
    readBy:[user.uid],
-
    createdAt:serverTimestamp()
-
   });
 
   $("message").value = "";
 
- } catch (error) {
-
-  toast(
-   "Não foi possível enviar: " + error.message
-  );
-
- } finally {
-
+ }catch(error){
+  toast("Não foi possível enviar: "+error.message);
+ }finally{
   $("send").disabled = false;
-
   $("message").focus();
-
  }
-
 });
 
 // ==========================================
 // MENU
 // ==========================================
 
-$("menuBtn").addEventListener("click", () => {
-
+$("menuBtn").addEventListener("click",()=>{
  $("menu").hidden = !$("menu").hidden;
-
 });
 
-document.addEventListener("click", event => {
-
- if (!$("menuWrap").contains(event.target)) {
+document.addEventListener("click",event=>{
+ if(!$("menuWrap").contains(event.target)){
   $("menu").hidden = true;
  }
-
 });
 
 // ==========================================
 // APAGAR HISTÓRICO PARA OS DOIS
 // ==========================================
 
-$("deleteBtn").addEventListener("click", () => {
-
+$("deleteBtn").addEventListener("click",()=>{
  $("menu").hidden = true;
-
  $("overlay").hidden = false;
-
 });
 
-$("cancelDelete").addEventListener("click", () => {
-
+$("cancelDelete").addEventListener("click",()=>{
  $("overlay").hidden = true;
-
 });
 
-$("confirmDelete").addEventListener("click", async () => {
-
- if (!user) return;
+$("confirmDelete").addEventListener("click",async()=>{
+ if(!user)return;
 
  $("confirmDelete").disabled = true;
 
- try {
-
+ try{
   const snapshot = await getDocs(messagesRef);
+  const docs = snapshot.docs;
 
-  const documents = snapshot.docs;
-
-  // Excluir em grupos para evitar limite de operações.
-
-  for (let i = 0; i < documents.length; i += 400) {
-
+  for(let i=0;i<docs.length;i+=400){
    await Promise.all(
-    documents
-     .slice(i, i + 400)
-     .map(item => deleteDoc(item.ref))
+    docs.slice(i,i+400).map(item=>deleteDoc(item.ref))
    );
-
   }
 
   $("overlay").hidden = true;
-
   toast("Histórico apagado para os dois participantes.");
 
- } catch (error) {
-
-  toast(
-   "Erro ao apagar: " + error.message
-  );
-
- } finally {
-
+ }catch(error){
+  toast("Erro ao apagar: "+error.message);
+ }finally{
   $("confirmDelete").disabled = false;
-
  }
-
 });
 
 // ==========================================
-// SAIR DA CONTA
+// SAIR
 // ==========================================
 
-$("logout").addEventListener("click", async () => {
-
+$("logout").addEventListener("click",async()=>{
  $("menu").hidden = true;
-
  cleanup();
 
- if (user) {
-
-  try {
-
-   await remove(
-    ref(rtdb, "presence/" + user.uid)
-   );
-
-  } catch (error) {
-
+ if(user){
+  try{
+   await remove(ref(rtdb,"presence/"+user.uid));
+  }catch(error){
    console.warn(error);
-
   }
-
  }
 
  $("email").value = "";
-
  $("password").value = "";
 
  await signOut(auth);
-
 });
 
 // ==========================================
-// ESTADO DE AUTENTICAÇÃO
+// AUTENTICAÇÃO
 // ==========================================
 
-onAuthStateChanged(auth, async current => {
-
+onAuthStateChanged(auth,async current=>{
  user = current;
 
- if (!current) {
-
+ if(!current){
   cleanup();
-
   $("chat").hidden = true;
-
   $("login").hidden = false;
-
   $("email").value = "";
-
   $("password").value = "";
-
   $("statusMsg").textContent = "";
-
   return;
-
  }
 
- try {
-
+ try{
   await startChat(current);
-
- } catch (error) {
-
+ }catch(error){
   cleanup();
-
   $("chat").hidden = true;
-
   $("login").hidden = false;
-
   showError(error.message);
-
  }
-
 });
+
+// ==========================================
+// SERVICE WORKER PWA
+// ==========================================
+
+if("serviceWorker" in navigator){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./sw.js")
+   .then(()=>console.log("AURA PWA ativo"))
+   .catch(error=>console.error("Erro PWA:",error));
+ });
+}
 
 </script>
 </body>
 </html>
-
