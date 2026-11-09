@@ -3,187 +3,510 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
-<title>Conversa Privada</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090d16">
+<title>AURA</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#f4f5f7;color:#252832;
- font-family:Arial,sans-serif
+:root {
+  color-scheme: dark;
+  --bg: #090d16;
+  --panel: #111a29;
+  --line: #293750;
+  --text: #f2f6ff;
+  --muted: #91a0b8;
+  --blue: #397cff;
+  --green: #35d49a;
+  --red: #ff7187;
 }
-button,input{font:inherit}
-button{cursor:pointer;border:0}
-#login{
- max-width:430px;margin:45px auto;padding:25px;
- background:white;border-radius:18px
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, Arial, sans-serif;
 }
-h1{font-size:27px;margin-bottom:8px}
-.sub{color:#858b98;font-size:14px}
-input{
- width:100%;padding:14px;margin:8px 0;
- border:1px solid #e0e3e9;border-radius:10px;
- outline:none
+
+body { min-height: 100dvh; }
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+[hidden] { display: none !important; }
+
+/* LOGOMARCA ORIGINAL VG */
+
+.logo {
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+  border-radius: 19px;
+  border: 1px solid #315a91;
+  box-shadow: 0 0 25px #087bff35;
+  background: #080e19;
+  flex-shrink: 0;
 }
-input:focus{border-color:#4265f5}
-.primary{
- background:#4265f5;color:white;padding:13px;
- border-radius:10px;width:100%;font-weight:bold
+
+.small-logo {
+  width: 49px;
+  height: 49px;
+  border-radius: 14px;
 }
-.secondary{
- background:#eef0f5;color:#333;padding:13px;
- border-radius:10px;width:100%;font-weight:bold
+
+/* TELA DE LOGIN */
+
+#login {
+  width: min(100% - 28px, 440px);
+  margin: 7vh auto 24px;
+  padding: 25px;
+  background: linear-gradient(150deg,#17243a,#101725);
+  border: 1px solid var(--line);
+  border-radius: 25px;
+  box-shadow: 0 20px 60px #0007;
 }
-.actions{display:flex;gap:10px;margin-top:12px}
-#statusMsg{font-size:13px;margin-top:15px;color:#555}
-#error{font-size:13px;color:#bd2929;margin-top:12px}
-#chat{
- display:none;max-width:850px;height:100dvh;
- margin:auto;background:white;flex-direction:column
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 24px;
 }
-header{
- display:flex;align-items:center;padding:15px;
- border-bottom:1px solid #eee;gap:12px
+
+.brand h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: .19em;
 }
-.avatar{
- width:42px;height:42px;border-radius:14px;
- background:#e9edff;color:#4265f5;
- display:grid;place-items:center;font-weight:bold
+
+.brand p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
 }
-.info{flex:1}
-.info strong{display:block}
-#status{font-size:12px;color:#888;margin-top:4px}
-.online{color:#16845b!important}
-#logout{
- background:#eef0f5;color:#333;
- padding:10px;border-radius:9px
+
+h2 { font-size: 20px; }
+
+.sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
 }
-#messages{
- flex:1;overflow-y:auto;padding:18px;
- display:flex;flex-direction:column;gap:12px
+
+label {
+  display: block;
+  font-size: 13px;
+  color: #c8d4e8;
+  margin: 14px 0 7px;
 }
-.empty{
- margin:auto;text-align:center;color:#999;
- line-height:1.7
+
+input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #35445d;
+  border-radius: 13px;
+  background: #0b1321;
+  color: var(--text);
+  outline: none;
 }
-.msg{
- max-width:82%;padding:11px 13px;
- background:#f0f1f4;border-radius:14px;
- align-self:flex-start;overflow-wrap:anywhere
+
+input:focus {
+  border-color: #5792ff;
+  box-shadow: 0 0 0 3px #397cff22;
 }
-.msg.mine{
- align-self:flex-end;background:#e9edff;
- border-bottom-right-radius:4px
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
 }
-.meta{
- text-align:right;color:#888;
- font-size:10px;margin-top:6px
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 13px;
+  padding: 13px 15px;
+  font-weight: 700;
 }
-#composer{
- display:flex;gap:8px;padding:12px;
- border-top:1px solid #eee
+
+.primary {
+  background: linear-gradient(100deg,#397cff,#245fe0);
+  color: white;
+  flex: 1;
 }
-#message{flex:1;min-width:0;margin:0}
-.send{
- background:#4265f5;color:white;
- border-radius:10px;padding:13px 16px
+
+.secondary {
+  background: #202d42;
+  color: #e2eaff;
+  border-color: #35445d;
+  flex: 1;
 }
-.send:disabled{opacity:.5}
-@media(max-width:500px){
- #login{margin:20px 12px}
- #chat{height:100dvh}
+
+#error, #statusMsg {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 13px;
+  overflow-wrap: anywhere;
+}
+
+#error { color: #ff8999; }
+#statusMsg { color: #a9c6ff; }
+
+/* CONVERSA */
+
+#chat {
+  height: 100dvh;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+header {
+  height: 78px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #0e1726;
+  border-bottom: 1px solid var(--line);
+}
+
+.head {
+  flex: 1;
+  min-width: 0;
+}
+
+.head strong {
+  font-size: 16px;
+  letter-spacing: .18em;
+}
+
+.status {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.status.online { color: var(--green); }
+
+#menuWrap { position: relative; }
+
+.icon {
+  width: 43px;
+  height: 43px;
+  border: 1px solid #34435b;
+  border-radius: 12px;
+  background: #1a263a;
+  color: #e4edff;
+  font-size: 23px;
+}
+
+#menu {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 230px;
+  padding: 7px;
+  background: #182438;
+  border: 1px solid #364761;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px #0009;
+  z-index: 5;
+}
+
+.menuitem {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  border-radius: 9px;
+  padding: 12px;
+  background: transparent;
+  color: var(--text);
+}
+
+.menuitem.danger { color: var(--red); }
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 14px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.empty {
+  margin: auto;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.msg {
+  max-width: min(84%,600px);
+  padding: 11px 13px 8px;
+  background: #182438;
+  border: 1px solid #2b3a53;
+  border-radius: 17px 17px 17px 5px;
+  align-self: flex-start;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.msg.mine {
+  align-self: flex-end;
+  background: linear-gradient(145deg,#203e73,#192e52);
+  border-color: #31568c;
+  border-radius: 17px 17px 5px 17px;
+}
+
+.msgtext {
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.meta {
+  font-size: 10px;
+  color: #aab8ce;
+  text-align: right;
+  margin-top: 6px;
+}
+
+#composer {
+  display: flex;
+  gap: 9px;
+  padding: 11px 12px calc(11px + env(safe-area-inset-bottom));
+  background: #0e1726;
+  border-top: 1px solid var(--line);
+}
+
+#message {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  border-radius: 15px;
+  background: #121e30;
+}
+
+#send {
+  padding: 0 18px;
+  border: 0;
+  border-radius: 14px;
+  background: linear-gradient(100deg,#397cff,#245fe0);
+  color: white;
+  font-weight: 700;
+}
+
+/* CONFIRMAÇÃO DE EXCLUSÃO */
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: #000b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  z-index: 10;
+}
+
+.dialog {
+  width: min(100%,380px);
+  padding: 22px;
+  border-radius: 20px;
+  background: #172338;
+  border: 1px solid #3a4c69;
+}
+
+.dialog h3 { margin: 0 0 9px; }
+
+.dialog p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dialogactions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dialogactions button { flex: 1; }
+
+#toast {
+  position: fixed;
+  bottom: calc(85px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 11px 16px;
+  background: #24334c;
+  border: 1px solid #405777;
+  border-radius: 12px;
+  z-index: 20;
+  font-size: 13px;
+  max-width: 90%;
+  text-align: center;
+}
+
+@media(min-width:700px) {
+  #chat {
+    height: min(900px,100dvh);
+    border-inline: 1px solid var(--line);
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+
 <section id="login">
- <h1>Conversa Privada.</h1>
- <p class="sub">Um espaço reservado para duas pessoas.</p>
 
- <form id="loginForm">
-  <input id="email" type="email"
-   placeholder="Seu e-mail" required>
-
-  <input id="password" type="password"
-   placeholder="Sua senha" minlength="6" required>
-
-  <div class="actions">
-   <button class="primary" type="submit">Entrar</button>
-   <button class="secondary" type="button"
-    id="register">Cadastrar</button>
-  </div>
- </form>
-
- <div id="statusMsg"></div>
- <div id="error"></div>
-</section>
-
-<section id="chat">
-
- <header>
-  <div class="avatar">C</div>
-
-  <div class="info">
-   <strong>Conversa privada</strong>
-   <div id="presenceStatus">Conectando...</div>
+  <div class="brand">
+    <img class="logo" src="logo-vg.png" alt="Logomarca VG">
+    <div>
+      <h1>AURA</h1>
+      <p>Uma conexão em outro nível.</p>
+    </div>
   </div>
 
-  <button id="logout">Sair</button>
- </header>
+  <h2>Bem-vindo</h2>
+  <p class="sub">Entre com seu e-mail e sua senha para continuar.</p>
 
- <div id="messages">
-  <div class="empty">Carregando conversa...</div>
- </div>
+  <form id="loginForm" autocomplete="off">
 
- <form id="composer">
-  <input id="message" type="text"
-   placeholder="Escreva uma mensagem..."
-   maxlength="4000" autocomplete="off">
+    <label for="email">E-mail</label>
+    <input id="email" type="email"
+      placeholder="Seu e-mail"
+      autocomplete="off"
+      autocapitalize="none"
+      spellcheck="false"
+      required>
 
-  <button class="send" type="submit">Enviar</button>
- </form>
+    <label for="password">Senha</label>
+    <input id="password" type="password"
+      placeholder="Sua senha"
+      autocomplete="new-password"
+      required>
+
+    <div class="actions">
+      <button class="btn primary" type="submit">Entrar</button>
+      <button class="btn secondary" id="register" type="button">Cadastrar</button>
+    </div>
+
+  </form>
+
+  <div id="statusMsg"></div>
+  <div id="error" role="alert"></div>
 
 </section>
+
+<!-- CHAT -->
+
+<section id="chat" hidden>
+
+  <header>
+
+    <img class="logo small-logo"
+      src="logo-vg.png" alt="VG">
+
+    <div class="head">
+      <strong>AURA</strong>
+      <div id="presence" class="status">Conectando...</div>
+    </div>
+
+    <div id="menuWrap">
+
+      <button id="menuBtn" class="icon"
+        type="button" aria-label="Menu">⋮</button>
+
+      <div id="menu" hidden>
+
+        <button id="deleteBtn"
+          class="menuitem danger" type="button">
+          Apagar histórico
+        </button>
+
+        <button id="logout"
+          class="menuitem" type="button">
+          Sair da conta
+        </button>
+
+      </div>
+    </div>
+
+  </header>
+
+  <main id="messages" aria-live="polite">
+    <div class="empty">Carregando mensagens...</div>
+  </main>
+
+  <form id="composer">
+
+    <input id="message"
+      type="text"
+      maxlength="4000"
+      placeholder="Escreva uma mensagem..."
+      autocomplete="off">
+
+    <button id="send" type="submit">Enviar</button>
+
+  </form>
+
+</section>
+
+<!-- JANELA DE CONFIRMAÇÃO -->
+
+<div id="overlay" hidden>
+
+  <div class="dialog">
+
+    <h3>Apagar histórico?</h3>
+
+    <p>
+      Todas as mensagens serão apagadas para os dois participantes.
+      Esta ação não poderá ser desfeita.
+    </p>
+
+    <div class="dialogactions">
+
+      <button id="cancelDelete"
+        class="btn secondary" type="button">
+        Cancelar
+      </button>
+
+      <button id="confirmDelete"
+        class="btn primary" type="button">
+        Apagar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="toast" hidden></div>
 
 <script type="module">
 
-// ======================================
-// FIREBASE CONFIG
-// COLOQUE AQUI OS SEUS DADOS REAIS
-// ======================================
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDLvv51dB1xVaI7jwrRFVjqXzWy_wjNo6w",
-  authDomain: "conversa-privada-87a46.firebaseapp.com",
-  databaseURL: "https://conversa-privada-87a46-default-rtdb.firebaseio.com",
-  projectId: "conversa-privada-87a46",
-  storageBucket: "conversa-privada-87a46.firebasestorage.app",
-  messagingSenderId: "1050586962296",
-  appId: "1:1050586962296:web:49fec0077191c5506b908d"
-};
-
-// ======================================
-// CONFIGURAÇÃO DA CONVERSA
-// ======================================
-
-const CONVERSATION_ID = "conversa-privada";
-
-// ======================================
-// BIBLIOTECAS
-// ======================================
-
-import { initializeApp }
- from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
  getAuth,
  onAuthStateChanged,
  createUserWithEmailAndPassword,
  signInWithEmailAndPassword,
- signOut
+ signOut,
+ setPersistence,
+ inMemoryPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -198,493 +521,624 @@ import {
  addDoc,
  updateDoc,
  arrayUnion,
- serverTimestamp
+ serverTimestamp,
+ getDocs,
+ deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
  getDatabase,
  ref,
+ get,
  onValue,
  onDisconnect,
  set,
  remove,
- serverTimestamp as realtimeTimestamp
+ serverTimestamp as rtdbTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// ======================================
+// ==========================================
+// CONFIGURAÇÃO DO FIREBASE
+// MANTENHA SEUS DADOS REAIS AQUI
+// ==========================================
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDLvv51dB1xVaI7jwrRFVjqXzWy_wjNo6w",
+  authDomain: "conversa-privada-87a46.firebaseapp.com",
+  databaseURL: "https://conversa-privada-87a46-default-rtdb.firebaseio.com",
+  projectId: "conversa-privada-87a46",
+  storageBucket: "conversa-privada-87a46.firebasestorage.app",
+  messagingSenderId: "1050586962296",
+  appId: "1:1050586962296:web:49fec0077191c5506b908d"
+};
+
+// IDENTIFICADOR DA CONVERSA
+const ROOM = "conversa-privada";
+
+// ==========================================
 // INICIALIZAÇÃO
-// ======================================
+// ==========================================
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
-const realtime = getDatabase(app);
+
+const rtdb = getDatabase(app);
+
+await setPersistence(auth, inMemoryPersistence);
 
 const $ = id => document.getElementById(id);
 
-let usuario = null;
-let pararMensagens = null;
-let pararConexao = null;
-let pararOutroUsuario = null;
-let mensagensConhecidas = new Set();
-
-const mensagensRef = collection(
+const messagesRef = collection(
  db,
  "conversations",
- CONVERSATION_ID,
+ ROOM,
  "messages"
 );
 
-// ======================================
+let user = null;
+
+let stopMessages = null;
+let stopConnection = null;
+let stopOther = null;
+let toastTimer = null;
+
+// ==========================================
 // FUNÇÕES AUXILIARES
-// ======================================
+// ==========================================
 
-function erro(texto){
- $("error").textContent = texto;
+function showError(text) {
+ $("error").textContent = text || "";
 }
 
-function limpar(){
- if(pararMensagens){
-  pararMensagens();
-  pararMensagens = null;
- }
+function toast(text) {
+ $("toast").textContent = text;
+ $("toast").hidden = false;
 
- if(pararConexao){
-  pararConexao();
-  pararConexao = null;
- }
+ clearTimeout(toastTimer);
 
- if(pararOutroUsuario){
-  pararOutroUsuario();
-  pararOutroUsuario = null;
- }
+ toastTimer = setTimeout(() => {
+  $("toast").hidden = true;
+ }, 3500);
 }
 
-function horario(timestamp){
- if(!timestamp || !timestamp.toDate) return "Agora";
+function cleanup() {
+
+ if (stopMessages) {
+  stopMessages();
+  stopMessages = null;
+ }
+
+ if (stopConnection) {
+  stopConnection();
+  stopConnection = null;
+ }
+
+ if (stopOther) {
+  stopOther();
+  stopOther = null;
+ }
+
+}
+
+function formatTime(timestamp) {
+
+ if (!timestamp?.toDate) return "agora";
 
  return timestamp.toDate().toLocaleString(
   "pt-BR",
-  {hour:"2-digit",minute:"2-digit",
-   day:"2-digit",month:"2-digit"}
+  {
+   day:"2-digit",
+   month:"2-digit",
+   hour:"2-digit",
+   minute:"2-digit"
+  }
  );
+
 }
 
-// ======================================
-// LOGIN
-// ======================================
+// ==========================================
+// VERIFICAR AUTORIZAÇÃO NO REALTIME DATABASE
+// ==========================================
 
-$("loginForm").addEventListener("submit",async e=>{
- e.preventDefault();
- erro("");
+async function isMember(uid) {
+
+ const snapshot = await get(
+  ref(rtdb, "members/" + uid)
+ );
+
+ return snapshot.val() === true;
+
+}
+
+// ==========================================
+// MOSTRAR MENSAGENS
+// ==========================================
+
+function drawMessage(data) {
+
+ const mine = data.senderId === user.uid;
+
+ const bubble = document.createElement("article");
+
+ bubble.className = "msg" + (mine ? " mine" : "");
+
+ const text = document.createElement("div");
+
+ text.className = "msgtext";
+
+ text.textContent = data.text || "";
+
+ bubble.appendChild(text);
+
+ const meta = document.createElement("div");
+
+ meta.className = "meta";
+
+ const read =
+  Array.isArray(data.readBy) &&
+  data.readBy.length > 1;
+
+ meta.textContent =
+  formatTime(data.createdAt) +
+  (mine
+   ? (read ? " · Visualizada" : " · Enviada")
+   : "");
+
+ bubble.appendChild(meta);
+
+ $("messages").appendChild(bubble);
+
+}
+
+// ==========================================
+// MARCAR MENSAGEM COMO VISUALIZADA
+// ==========================================
+
+async function markRead(id, data) {
+
+ if (data.senderId === user.uid) return;
+
+ if ((data.readBy || []).includes(user.uid)) return;
+
+ try {
+
+  await updateDoc(
+   doc(db, "conversations", ROOM, "messages", id),
+   {
+    readBy: arrayUnion(user.uid)
+   }
+  );
+
+ } catch (error) {
+
+  console.warn("Erro ao marcar leitura:", error);
+
+ }
+
+}
+
+// ==========================================
+// INICIAR CONVERSA
+// ==========================================
+
+async function startChat(current) {
+
+ if (!(await isMember(current.uid))) {
+
+  await signOut(auth);
+
+  throw Error(
+   "Sua conta ainda não foi autorizada pelo administrador."
+  );
+
+ }
+
+ const conversation = await getDoc(
+  doc(db, "conversations", ROOM)
+ );
+
+ if (
+  !conversation.exists() ||
+  !(conversation.data().members || []).includes(current.uid)
+ ) {
+
+  await signOut(auth);
+
+  throw Error(
+   "Esta conta não está autorizada nesta conversa."
+  );
+
+ }
+
+ const members = conversation.data().members;
+
+ $("login").hidden = true;
+
+ $("chat").hidden = false;
+
+ $("messages").innerHTML =
+  '<div class="empty">Carregando mensagens...</div>';
+
+ // CARREGAR HISTÓRICO
+
+ const q = query(
+  messagesRef,
+  orderBy("createdAt", "asc"),
+  limit(300)
+ );
+
+ stopMessages = onSnapshot(q, snapshot => {
+
+  $("messages").innerHTML = "";
+
+  if (snapshot.empty) {
+
+   $("messages").innerHTML =
+    '<div class="empty">Nenhuma mensagem ainda.<br>Envie um oi para começar.</div>';
+
+   return;
+
+  }
+
+  snapshot.forEach(item => {
+
+   const data = item.data();
+
+   drawMessage(data);
+
+   markRead(item.id, data);
+
+  });
+
+  $("messages").scrollTop =
+   $("messages").scrollHeight;
+
+ }, error => {
+
+  toast("Erro ao carregar mensagens: " + error.message);
+
+ });
+
+ // PRESENÇA ONLINE / OFFLINE
+
+ const myPresence = ref(
+  rtdb,
+  "presence/" + current.uid
+ );
+
+ const connected = ref(
+  rtdb,
+  ".info/connected"
+ );
+
+ stopConnection = onValue(
+  connected,
+  async snapshot => {
+
+   if (snapshot.val() === true) {
+
+    try {
+
+     await onDisconnect(myPresence).remove();
+
+     await set(myPresence, {
+      state:"online",
+      lastChanged:rtdbTimestamp()
+     });
+
+    } catch (error) {
+
+     console.warn("Erro de presença:", error);
+
+    }
+
+   }
+
+  }
+ );
+
+ const other = members.find(
+  uid => uid !== current.uid
+ );
+
+ if (other) {
+
+  stopOther = onValue(
+   ref(rtdb, "presence/" + other),
+   snapshot => {
+
+    const online =
+     snapshot.exists() &&
+     snapshot.val()?.state === "online";
+
+    $("presence").textContent =
+     online ? "● Online" : "Offline";
+
+    $("presence").className =
+     "status" + (online ? " online" : "");
+
+   }
+  );
+
+ } else {
+
+  $("presence").textContent = "Conectado";
+
+ }
+
+}
+
+// ==========================================
+// ENTRAR
+// ==========================================
+
+$("loginForm").addEventListener("submit", async event => {
+
+ event.preventDefault();
+
+ showError("");
+
  $("statusMsg").textContent = "";
 
- try{
+ try {
+
   await signInWithEmailAndPassword(
    auth,
    $("email").value.trim(),
    $("password").value
   );
- }catch(err){
-  erro("Não foi possível entrar: "+err.message);
+
+  $("password").value = "";
+
+ } catch (error) {
+
+  showError(
+   "Não foi possível entrar: " + error.message
+  );
+
  }
+
 });
 
-// ======================================
-// CADASTRO
-// ======================================
+// ==========================================
+// CADASTRAR
+// ==========================================
 
-$("register").addEventListener("click",async()=>{
+$("register").addEventListener("click", async () => {
 
- erro("");
+ showError("");
+
  $("statusMsg").textContent = "";
 
- try{
+ try {
 
-  const resultado =
+  const credential =
    await createUserWithEmailAndPassword(
     auth,
     $("email").value.trim(),
     $("password").value
    );
 
-  const uid = resultado.user.uid;
+  const uid = credential.user.uid;
 
   await signOut(auth);
 
-  $("statusMsg").textContent =
-   "Cadastro realizado! Seu UID é: "+uid+
-   ". Aguarde o administrador autorizar seu acesso. Depois, entre normalmente.";
+  $("password").value = "";
 
- }catch(err){
-  erro("Erro no cadastro: "+err.message);
+  $("statusMsg").textContent =
+   "Cadastro criado! UID: " + uid +
+   ". Solicite ao administrador a autorização.";
+
+ } catch (error) {
+
+  showError(
+   "Não foi possível cadastrar: " + error.message
+  );
+
  }
 
 });
 
-// ======================================
-// VERIFICAR AUTORIZAÇÃO
-// ======================================
-
-async function verificarMembro(user){
-
- const membroRef = ref(
-  realtime,
-  "members/"+user.uid
- );
-
- const resultado = await new Promise((resolve,reject)=>{
-
-  const cancelar = onValue(
-   membroRef,
-   snapshot=>{
-    cancelar();
-    resolve(snapshot.val() === true);
-   },
-   error=>{
-    cancelar();
-    reject(error);
-   },
-   {onlyOnce:true}
-  );
-
- });
-
- return resultado;
-}
-
-// ======================================
-// INICIAR CONVERSA
-// ======================================
-
-async function iniciarChat(user){
-
- const autorizado = await verificarMembro(user);
-
- if(!autorizado){
-  await signOut(auth);
-  throw new Error(
-   "Acesso ainda não autorizado. Solicite liberação ao administrador."
-  );
- }
-
- const conversa = await getDoc(
-  doc(db,"conversations",CONVERSATION_ID)
- );
-
- if(!conversa.exists() ||
-    !(conversa.data().members || []).includes(user.uid)){
-
-  await signOut(auth);
-
-  throw new Error(
-   "Sua conta ainda não está cadastrada na conversa."
-  );
-
- }
-
- $("login").style.display = "none";
- $("chat").style.display = "flex";
-
- carregarMensagens();
- configurarPresenca(conversa.data().members);
-
-}
-
-// ======================================
-// CARREGAR MENSAGENS
-// ======================================
-
-function carregarMensagens(){
-
- const consulta = query(
-  mensagensRef,
-  orderBy("createdAt","desc"),
-  limit(200)
- );
-
- pararMensagens = onSnapshot(
-  consulta,
-  snapshot=>{
-
-   $("messages").innerHTML = "";
-
-   if(snapshot.empty){
-    $("messages").innerHTML =
-     '<div class="empty">Nenhuma mensagem ainda.<br>Envie um oi para começar!</div>';
-    return;
-   }
-
-   [...snapshot.docs].reverse().forEach(d=>{
-
-    const dados = d.data();
-
-    exibirMensagem(dados);
-
-    if(!mensagensConhecidas.has(d.id)){
-     mensagensConhecidas.add(d.id);
-
-     if(dados.senderId !== usuario.uid &&
-        document.hidden &&
-        "Notification" in window &&
-        Notification.permission === "granted"){
-
-      new Notification("Nova mensagem",{
-       body:dados.text || "Nova mensagem recebida."
-      });
-
-     }
-    }
-
-    marcarLeitura(d.id,dados);
-
-   });
-
-   $("messages").scrollTop =
-    $("messages").scrollHeight;
-
-  },
-  err=>erro("Erro ao receber mensagens: "+err.message)
- );
-
-}
-
-// ======================================
-// EXIBIR MENSAGEM
-// ======================================
-
-function exibirMensagem(dados){
-
- const minha = dados.senderId === usuario.uid;
-
- const caixa = document.createElement("div");
- caixa.className = "msg"+(minha?" mine":"");
-
- const texto = document.createElement("div");
- texto.textContent = dados.text || "";
-
- caixa.appendChild(texto);
-
- const meta = document.createElement("div");
- meta.className = "meta";
-
- const visualizada =
-  Array.isArray(dados.readBy) &&
-  dados.readBy.length > 1;
-
- meta.textContent =
-  horario(dados.createdAt)+
-  (minha ? (visualizada?" · Visualizada":" · Enviada") : "");
-
- caixa.appendChild(meta);
-
- $("messages").appendChild(caixa);
-
-}
-
-// ======================================
-// CONFIRMAÇÃO DE LEITURA
-// ======================================
-
-async function marcarLeitura(id,dados){
-
- if(
-  dados.senderId !== usuario.uid &&
-  !(dados.readBy || []).includes(usuario.uid)
- ){
-
-  try{
-   await updateDoc(
-    doc(db,"conversations",CONVERSATION_ID,"messages",id),
-    {readBy:arrayUnion(usuario.uid)}
-   );
-  }catch(err){
-   console.warn(err);
-  }
-
- }
-
-}
-
-// ======================================
-// PRESENÇA ONLINE / OFFLINE
-// ======================================
-
-function configurarPresenca(membros){
-
- const minhaRef = ref(
-  realtime,"presence/"+usuario.uid
- );
-
- const conexaoRef = ref(
-  realtime,".info/connected"
- );
-
- pararConexao = onValue(conexaoRef,async snapshot=>{
-
-  if(snapshot.val() === true){
-
-   try{
-    await onDisconnect(minhaRef).remove();
-
-    await set(minhaRef,{
-     state:"online",
-     lastChanged:realtimeTimestamp()
-    });
-
-   }catch(err){
-    console.warn("Presença:",err);
-   }
-
-  }
-
- });
-
- const outros = membros.filter(
-  uid=>uid !== usuario.uid
- );
-
- if(outros.length){
-
-  const outraRef = ref(
-   realtime,"presence/"+outros[0]
-  );
-
-  pararOutroUsuario = onValue(
-   outraRef,
-   snapshot=>{
-
-    const online =
-     snapshot.exists() &&
-     snapshot.val()?.state === "online";
-
-    $("presenceStatus").textContent =
-     online?"● Online":"Offline";
-
-    $("presenceStatus").className =
-     online?"online":"";
-
-   }
-  );
-
- }else{
-  $("presenceStatus").textContent = "Conversa ativa";
- }
-
-}
-
-// ======================================
+// ==========================================
 // ENVIAR MENSAGEM
-// ======================================
+// ==========================================
 
-$("composer").addEventListener("submit",async e=>{
+$("composer").addEventListener("submit", async event => {
 
- e.preventDefault();
+ event.preventDefault();
 
- const texto = $("message").value.trim();
+ const text = $("message").value.trim();
 
- if(!texto) return;
+ if (!text || !user) return;
 
- const botao = e.submitter;
- if(botao) botao.disabled = true;
+ $("send").disabled = true;
 
- try{
+ try {
 
-  await addDoc(mensagensRef,{
+  await addDoc(messagesRef, {
 
-   text:texto,
-   senderId:usuario.uid,
-   readBy:[usuario.uid],
+   text,
+
+   senderId:user.uid,
+
+   readBy:[user.uid],
+
    createdAt:serverTimestamp()
 
   });
 
   $("message").value = "";
 
- }catch(err){
+ } catch (error) {
 
-  erro("Não foi possível enviar: "+err.message);
+  toast(
+   "Não foi possível enviar: " + error.message
+  );
 
- }finally{
+ } finally {
 
-  if(botao) botao.disabled = false;
+  $("send").disabled = false;
+
+  $("message").focus();
 
  }
 
 });
 
-// ======================================
-// NOTIFICAÇÕES
-// ======================================
+// ==========================================
+// MENU
+// ==========================================
 
-async function ativarNotificacoes(){
+$("menuBtn").addEventListener("click", () => {
 
- if(
-  "Notification" in window &&
-  Notification.permission === "default"
- ){
+ $("menu").hidden = !$("menu").hidden;
 
-  try{
-   await Notification.requestPermission();
-  }catch(err){
-   console.warn(err);
+});
+
+document.addEventListener("click", event => {
+
+ if (!$("menuWrap").contains(event.target)) {
+  $("menu").hidden = true;
+ }
+
+});
+
+// ==========================================
+// APAGAR HISTÓRICO PARA OS DOIS
+// ==========================================
+
+$("deleteBtn").addEventListener("click", () => {
+
+ $("menu").hidden = true;
+
+ $("overlay").hidden = false;
+
+});
+
+$("cancelDelete").addEventListener("click", () => {
+
+ $("overlay").hidden = true;
+
+});
+
+$("confirmDelete").addEventListener("click", async () => {
+
+ if (!user) return;
+
+ $("confirmDelete").disabled = true;
+
+ try {
+
+  const snapshot = await getDocs(messagesRef);
+
+  const documents = snapshot.docs;
+
+  // Excluir em grupos para evitar limite de operações.
+
+  for (let i = 0; i < documents.length; i += 400) {
+
+   await Promise.all(
+    documents
+     .slice(i, i + 400)
+     .map(item => deleteDoc(item.ref))
+   );
+
+  }
+
+  $("overlay").hidden = true;
+
+  toast("Histórico apagado para os dois participantes.");
+
+ } catch (error) {
+
+  toast(
+   "Erro ao apagar: " + error.message
+  );
+
+ } finally {
+
+  $("confirmDelete").disabled = false;
+
+ }
+
+});
+
+// ==========================================
+// SAIR DA CONTA
+// ==========================================
+
+$("logout").addEventListener("click", async () => {
+
+ $("menu").hidden = true;
+
+ cleanup();
+
+ if (user) {
+
+  try {
+
+   await remove(
+    ref(rtdb, "presence/" + user.uid)
+   );
+
+  } catch (error) {
+
+   console.warn(error);
+
   }
 
  }
 
-}
+ $("email").value = "";
 
-// ======================================
-// SAIR
-// ======================================
-
-$("logout").addEventListener("click",async()=>{
-
- limpar();
-
- if(usuario){
-  try{
-   await remove(ref(realtime,"presence/"+usuario.uid));
-  }catch(err){
-   console.warn(err);
-  }
- }
+ $("password").value = "";
 
  await signOut(auth);
 
 });
 
-// ======================================
-// AUTENTICAÇÃO
-// ======================================
+// ==========================================
+// ESTADO DE AUTENTICAÇÃO
+// ==========================================
 
-onAuthStateChanged(auth,async user=>{
+onAuthStateChanged(auth, async current => {
 
- usuario = user;
+ user = current;
 
- if(!user){
+ if (!current) {
 
-  limpar();
-  $("chat").style.display = "none";
-  $("login").style.display = "block";
+  cleanup();
+
+  $("chat").hidden = true;
+
+  $("login").hidden = false;
+
+  $("email").value = "";
+
+  $("password").value = "";
+
+  $("statusMsg").textContent = "";
 
   return;
 
  }
 
- try{
+ try {
 
-  await iniciarChat(user);
-  ativarNotificacoes();
+  await startChat(current);
 
- }catch(err){
+ } catch (error) {
 
-  limpar();
+  cleanup();
 
-  $("chat").style.display = "none";
-  $("login").style.display = "block";
+  $("chat").hidden = true;
 
-  erro(err.message);
+  $("login").hidden = false;
+
+  showError(error.message);
 
  }
 
